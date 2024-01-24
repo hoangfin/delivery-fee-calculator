@@ -2,7 +2,7 @@ import { Box, BoxProps, Button, Stack, TextField } from "@mui/material";
 import { Euro, LocalShippingOutlined, ShoppingBasketOutlined } from "@mui/icons-material";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-type Inputs = {
+interface Inputs {
 	cartValue: number,
 	deliveryDistance: number,
 	numberOfItems: number,
@@ -10,9 +10,17 @@ type Inputs = {
 };
 
 export default function DeliveryFeeForm(props: BoxProps) {
-	const { register, handleSubmit } = useForm<Inputs>();
+	const {
+		register,
+		handleSubmit
+	} = useForm<Inputs>();
+
+	const handler = () => {
+		props.onSubmit(data, e)
+	}
+
 	return (
-		<Box component="form" onSubmit={handleSubmit(props.onSubmit)} rowGap={2} {...props} >
+		<Box component="form" onSubmit={handler} rowGap={2} {...props}>
 			<Box display="inline-flex" alignItems="flex-end">
 				<Euro sx={{ mr: 1, my: 0.5 }} />
 				<TextField
