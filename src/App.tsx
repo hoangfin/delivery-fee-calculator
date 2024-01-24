@@ -1,13 +1,21 @@
 import { Container, Stack, Typography } from "@mui/material";
-import DeliveryFeeForm from "@src/components/forms/DeliveryFeeForm";
+import DeliveryFeeForm, { Inputs } from "@src/components/forms/DeliveryFeeForm";
 import { FormEventHandler, useState } from "react";
 import { calculateDeliveryFee } from "@src/utils";
+import { SubmitHandler } from "react-hook-form";
 
 export default function App() {
 	const [fee, setFee] = useState<number>(0);
 
-	const handleSubmit: FormEventHandler<HTMLDivElement> = (e) => {
-		e.preventDefault();
+	const handleSubmit: SubmitHandler<Inputs> = (data, e) => {
+		e?.preventDefault();
+		setFee(calculateDeliveryFee(
+			data.cartValue,
+			data.numberOfItems,
+			data.deliveryDistance,
+			data.orderTime
+		));
+		console.log(data);
 	}
 
 	return (
@@ -15,7 +23,7 @@ export default function App() {
 			<DeliveryFeeForm
 				width="clamp(350px, 100%, 500px)"
 				marginX="auto"
-				onSubmit={handleSubmit}
+				abc={handleSubmit}
 			/>
 			<Typography>
 				Delivery cost:

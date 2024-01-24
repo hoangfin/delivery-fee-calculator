@@ -2,25 +2,27 @@ import { Box, BoxProps, Button, Stack, TextField } from "@mui/material";
 import { Euro, LocalShippingOutlined, ShoppingBasketOutlined } from "@mui/icons-material";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-interface Inputs {
+export interface Inputs {
 	cartValue: number,
 	deliveryDistance: number,
 	numberOfItems: number,
 	orderTime: Date
 };
 
-export default function DeliveryFeeForm(props: BoxProps) {
+type DeliveryFeeFormProps = BoxProps & {
+	abc: SubmitHandler<Inputs>;
+	// onSubmit: SubmitHandler<Inputs>;
+};
+
+export default function DeliveryFeeForm(props: DeliveryFeeFormProps) {
+	const { abc, ...rest } = props;
 	const {
 		register,
 		handleSubmit
 	} = useForm<Inputs>();
 
-	const handler = () => {
-		props.onSubmit(data, e)
-	}
-
 	return (
-		<Box component="form" onSubmit={handler} rowGap={2} {...props}>
+		<Stack component="form" onSubmit={handleSubmit(abc)} rowGap={2} {...rest}>
 			<Box display="inline-flex" alignItems="flex-end">
 				<Euro sx={{ mr: 1, my: 0.5 }} />
 				<TextField
@@ -66,6 +68,6 @@ export default function DeliveryFeeForm(props: BoxProps) {
 			<Button type="submit" variant="contained">
 				Calculate delivery price
 			</Button>
-		</Box>
+		</Stack>
 	);
 };
