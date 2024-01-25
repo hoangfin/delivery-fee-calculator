@@ -1,6 +1,6 @@
 
-const MAX_FEE = 1500;
-const BASE_DISTANCE_FEE: number = 200;
+const MAX_FEE = 15;
+const BASE_DISTANCE_FEE: number = 2;
 
 const calculateDistanceFee = (distance: number) => {
 	let fee: number = BASE_DISTANCE_FEE;
@@ -15,33 +15,36 @@ const calculateDistanceFee = (distance: number) => {
 
 const calculateSurcharge = (cartValue: number, numberOfItems: number): number => {
 	let surcharge: number = 0;
-	if (cartValue < 1000) {
-		surcharge = 1000 - cartValue;
+	if (cartValue < 10) {
+		surcharge = 10 - cartValue;
 	}
 	if (numberOfItems > 4) {
-		surcharge += (numberOfItems - 4) * 50;
+		surcharge += (numberOfItems - 4) * 0.5;
 	}
 	return surcharge;
 }
 
 const isRushHour = (orderTime: Date): boolean => {
+	console.log(new Date(orderTime).toISOString());
 	return false;
 }
 
-export const calculateDeliveryFee = (
+export const calculateDeliveryFee = ({ cartValue, numberOfItems, deliveryDistance, orderTime }: {
 	cartValue: number,
 	numberOfItems: number,
-	distance: number,
+	deliveryDistance: number,
 	orderTime: Date
-): number => {
-	if (cartValue >= 20000) {
+}): number => {
+	console.log(`${orderTime}`);
+	if (cartValue >= 200) {
 		return 0;
 	}
-	let deliveryFee: number = calculateDistanceFee(distance)
+	let deliveryFee: number = calculateDistanceFee(deliveryDistance)
 							+ calculateSurcharge(cartValue, numberOfItems);
 	if (isRushHour(orderTime)) {
 		deliveryFee *= 1.2;
 	}
+	console.log("deliveryFee == " + deliveryFee);
 	if (deliveryFee >= MAX_FEE) {
 		return MAX_FEE;
 	}

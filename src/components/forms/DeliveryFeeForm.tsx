@@ -9,20 +9,23 @@ export interface Inputs {
 	orderTime: Date
 };
 
-type DeliveryFeeFormProps = BoxProps & {
-	abc: SubmitHandler<Inputs>;
-	// onSubmit: SubmitHandler<Inputs>;
+type DeliveryFeeFormProps = Omit<BoxProps, "onSubmit"> & {
+	onSubmit: (data: Inputs, e?: React.BaseSyntheticEvent) => void;
 };
 
-export default function DeliveryFeeForm(props: DeliveryFeeFormProps) {
-	const { abc, ...rest } = props;
+export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
+	const { onSubmit, ...rest } = props;
 	const {
 		register,
 		handleSubmit
 	} = useForm<Inputs>();
 
+	const submitHandler: SubmitHandler<Inputs> = (data, e) => {
+		onSubmit(data, e);
+	};
+
 	return (
-		<Stack component="form" onSubmit={handleSubmit(abc)} rowGap={2} {...rest}>
+		<Stack component="form" onSubmit={handleSubmit(submitHandler)} rowGap={2} {...rest}>
 			<Box display="inline-flex" alignItems="flex-end">
 				<Euro sx={{ mr: 1, my: 0.5 }} />
 				<TextField
