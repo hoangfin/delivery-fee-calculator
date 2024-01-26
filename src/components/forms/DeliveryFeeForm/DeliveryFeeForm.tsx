@@ -12,10 +12,22 @@ export interface FormData {
 };
 
 const schema: ZodType<FormData> = z.object({
-	cartValue: z.number().gt(0, "Cart value must be bigger than 0"),
-	deliveryDistance: z.number(),
-	numberOfItems: z.number(),
-	orderTime: z.date()
+	cartValue: z.number({ invalid_type_error: "Expected number" })
+				.gt(0, "Cart value must be bigger than 0"),
+	deliveryDistance: z.number({
+							required_error: "Delivery Distance is required",
+							invalid_type_error: "Expected number"
+						})
+						.gt(0, "Delivery distance must be bigger than 0"),
+	numberOfItems: z.number({
+						required_error: "Number if Items are required",
+						invalid_type_error: "Expected number"
+					})
+					.gt(0, "Number of items must be bigger than 0"),
+	orderTime: z.date({
+		required_error: "Order Time is required",
+		invalid_type_error: "Expected date"
+	})
 });
 
 type DeliveryFeeFormProps = Omit<BoxProps, "onSubmit"> & {
@@ -43,10 +55,11 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 					label="Cart Value"
 					variant="standard"
 					inputProps={{ "data-test-id": "cartValue" }}
-					{...register("cartValue", { valueAsNumber: true })}
+					{...register("cartValue", { required: "Cart value is required", valueAsNumber: true })}
+					error={errors.cartValue ? true : false}
+					helperText={errors.cartValue?.message}
 				/>
 			</Box>
-			{errors.cartValue && <span>{errors.cartValue.message}</span>}
 
 			<Box display="inline-flex" alignItems="flex-end">
 				<LocalShippingOutlined sx={{ mr: 1, my: 0.5 }} />
@@ -55,7 +68,9 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 					label="Delivery distance (m)"
 					variant="standard"
 					inputProps={{ "data-test-id": "deliveryDistance" }}
-					{...register("deliveryDistance")}
+					{...register("deliveryDistance", { valueAsNumber: true })}
+					error={errors.deliveryDistance ? true : false}
+					helperText={errors.deliveryDistance?.message}
 				/>
 			</Box>
 
@@ -66,7 +81,9 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 					label="Amount of items"
 					variant="standard"
 					inputProps={{ "data-test-id": "numberOfItems" }}
-					{...register("numberOfItems")}
+					{...register("numberOfItems", { valueAsNumber: true })}
+					error={errors.numberOfItems ? true : false}
+					helperText={errors.numberOfItems?.message}
 				/>
 			</Box>
 
@@ -77,6 +94,8 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 				InputLabelProps={{ shrink: true }}
 				inputProps={{ "data-test-id": "orderTime" }}
 				{...register("orderTime")}
+				error={errors.orderTime ? true : false}
+				helperText={errors.orderTime?.message}
 			/>
 
 			<Button type="submit" variant="contained">
