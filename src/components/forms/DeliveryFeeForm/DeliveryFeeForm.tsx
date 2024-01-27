@@ -1,38 +1,9 @@
-import { Box, BoxProps, Button, Stack, TextField } from "@mui/material";
+import { Box, Button, Stack, TextField } from "@mui/material";
 import { Euro, LocalShippingOutlined, ShoppingBasketOutlined } from "@mui/icons-material";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { z, ZodType } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-export interface FormData {
-	cartValue: number,
-	deliveryDistance: number,
-	numberOfItems: number,
-	orderTime: Date
-};
-
-const schema: ZodType<FormData> = z.object({
-	cartValue: z.number({ invalid_type_error: "Expected number" })
-				.gt(0, "Cart value must be bigger than 0"),
-	deliveryDistance: z.number({
-							required_error: "Delivery Distance is required",
-							invalid_type_error: "Expected number"
-						})
-						.gt(0, "Delivery distance must be bigger than 0"),
-	numberOfItems: z.number({
-						required_error: "Number if Items are required",
-						invalid_type_error: "Expected number"
-					})
-					.gt(0, "Number of items must be bigger than 0"),
-	orderTime: z.date({
-		required_error: "Order Time is required",
-		invalid_type_error: "Expected date"
-	})
-});
-
-type DeliveryFeeFormProps = Omit<BoxProps, "onSubmit"> & {
-	onSubmit: (data: FormData, e?: React.BaseSyntheticEvent) => void | Promise<void>;
-};
+import { DeliveryFeeFormProps, FormData } from "./types";
+import { schema } from "./schema";
 
 export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 	const { onSubmit, ...rest } = props;
