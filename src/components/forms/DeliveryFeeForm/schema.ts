@@ -14,8 +14,9 @@ export const schema: ZodType<FormData> = z.object({
 						invalid_type_error: "Expected number"
 					})
 					.gt(0, "Number of items must be bigger than 0"),
-	orderTime: z.date({
-		required_error: "Order Time is required",
-		invalid_type_error: "Expected date"
-	})
+	orderTime: z.date()
+	// date({
+	// 	required_error: "Order Time is required",
+	// 	invalid_type_error: "Expected date"
+	// })
 });
