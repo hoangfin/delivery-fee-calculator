@@ -26,7 +26,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 					label="Cart Value"
 					variant="standard"
 					inputProps={{ "data-test-id": "cartValue" }}
-					{...register("cartValue", { required: "Cart value is required", valueAsNumber: true })}
+					{...register("cartValue", { valueAsNumber: true })}
 					error={errors.cartValue ? true : false}
 					helperText={errors.cartValue?.message}
 				/>
