@@ -1,8 +1,10 @@
 import { Box, BoxProps, Button, Stack, TextField } from "@mui/material";
 import { Euro, LocalShippingOutlined, ShoppingBasketOutlined } from "@mui/icons-material";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { z, ZodType } from "zod";
+// import { schema } from "./schema";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z, ZodType } from "zod";
 
 export interface FormData {
 	cartValue: number,
@@ -12,8 +14,12 @@ export interface FormData {
 };
 
 const schema: ZodType<FormData> = z.object({
-	cartValue: z.number({ invalid_type_error: "Expected number" })
-				.gt(0, "Cart value must be bigger than 0"),
+	cartValue: z.number().refine(number => {
+		console.log(number);
+		return undefined;
+	}, {
+		message: "Required"
+	}),
 	deliveryDistance: z.number({
 							required_error: "Delivery Distance is required",
 							invalid_type_error: "Expected number"
@@ -55,7 +61,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 					label="Cart Value"
 					variant="standard"
 					inputProps={{ "data-test-id": "cartValue" }}
-					{...register("cartValue", { required: "Cart value is required", valueAsNumber: true })}
+					{...register("cartValue", { valueAsNumber: true })}
 					error={errors.cartValue ? true : false}
 					helperText={errors.cartValue?.message}
 				/>
