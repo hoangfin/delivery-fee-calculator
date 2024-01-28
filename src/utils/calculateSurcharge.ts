@@ -6,5 +6,8 @@ export const calculateSurcharge = (cartValue: number, numberOfItems: number): nu
 	if (numberOfItems > 4) {
 		surcharge += (numberOfItems - 4) * 0.5;
 	}
+	if (numberOfItems > 12) {
+		surcharge += 1.2;
+	}
 	return surcharge;
 };

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "test": "jest --passWithNoTests --updateSnapshot --coverage",
+    "test": "jest --passWithNoTests --updateSnapshot --coverage --verbose",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
