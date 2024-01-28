@@ -1,12 +1,8 @@
 import { calculateFeeByDistance } from "./calculateFeeByDistance";
 import { calculateSurcharge } from "./calculateSurcharge";
+import { isRushHour } from "./isRushHour";
 
-const MAX_FEE = 15;
-
-const isRushHour = (orderTime: Date): boolean => {
-	console.log(new Date(orderTime).toISOString());
-	return false;
-}
+const MAX_DELIVERY_FEE = 15;
 
 export const calculateDeliveryFee = ({ cartValue, numberOfItems, deliveryDistance, orderTime }: {
 	cartValue: number,
@@ -14,7 +10,7 @@ export const calculateDeliveryFee = ({ cartValue, numberOfItems, deliveryDistanc
 	deliveryDistance: number,
 	orderTime: Date
 }): number => {
-	console.log(`${orderTime}`);
+	console.log(`${orderTime.getHours()}`);
 	if (cartValue >= 200) {
 		return 0;
 	}
@@ -23,9 +19,8 @@ export const calculateDeliveryFee = ({ cartValue, numberOfItems, deliveryDistanc
 	if (isRushHour(orderTime)) {
 		deliveryFee *= 1.2;
 	}
-	console.log("deliveryFee == " + deliveryFee);
-	if (deliveryFee >= MAX_FEE) {
-		return MAX_FEE;
+	if (deliveryFee >= MAX_DELIVERY_FEE) {
+		return MAX_DELIVERY_FEE;
 	}
 	return deliveryFee;
 };
