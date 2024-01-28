@@ -2,8 +2,24 @@ import { z, ZodType } from "zod";
 import { FormData } from "./types";
 
 export const schema: ZodType<FormData> = z.object({
-	cartValue: z.number({ invalid_type_error: "Expected number" })
-				.gt(0, "Cart value must be bigger than 0"),
+	cartValue: z.number().superRefine((number, ctx) => {
+		if (typeof number === "string" && number === "") {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: "cart value is required",
+				fatal: true
+			});
+			return z.NEVER;
+		}
+		if (number <= 0) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: "cart value must be greater than 0",
+				fatal: true
+			});
+			return z.NEVER;
+		}
+	}),
 	deliveryDistance: z.number({
 							required_error: "Delivery Distance is required",
 							invalid_type_error: "Expected number"

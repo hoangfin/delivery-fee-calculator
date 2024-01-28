@@ -15,7 +15,12 @@ export default function App() {
 
 	return (
 		<Stack component={Container} minHeight="100%" justifyContent="center" alignItems="center">
-			<DeliveryFeeForm width="clamp(350px, 100%, 500px)" marginX="auto" onSubmit={handleSubmit} />
+			<DeliveryFeeForm
+				width="clamp(300px, 100%, 500px)"
+				boxSizing="border-box"
+				marginX="auto"
+				onSubmit={handleSubmit}
+			/>
 			<Typography>
 				Delivery cost:
 				<Typography component="span" data-test-id="fee">{fee}$</Typography>

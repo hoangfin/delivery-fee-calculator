@@ -10,7 +10,6 @@ export const calculateDeliveryFee = ({ cartValue, numberOfItems, deliveryDistanc
 	deliveryDistance: number,
 	orderTime: Date
 }): number => {
-	console.log(`${orderTime.getHours()}`);
 	if (cartValue >= 200) {
 		return 0;
 	}

@@ -1,4 +1,4 @@
-import { Box, Button, Stack, TextField } from "@mui/material";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { Euro, LocalShippingOutlined, ShoppingBasketOutlined } from "@mui/icons-material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,7 +18,18 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 	};
 
 	return (
-		<Stack component="form" onSubmit={handleSubmit(submitHandler)} rowGap={2} {...rest}>
+		<Stack
+			component="form"
+			padding={2}
+			borderRadius={2}
+			onSubmit={handleSubmit(submitHandler)}
+			rowGap={2}
+			boxShadow={2}
+			{...rest}
+		>
+			<Typography component="h3" color="warning.main">
+				Delivery Fee Calculator
+			</Typography>
 			<Box display="inline-flex" alignItems="flex-end">
 				<Euro sx={{ mr: 1, my: 0.5 }} />
 				<TextField
@@ -26,7 +37,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 					label="Cart Value"
 					variant="standard"
 					inputProps={{ "data-test-id": "cartValue" }}
-					{...register("cartValue", { valueAsNumber: true })}
+					{...register("cartValue")}
 					error={errors.cartValue ? true : false}
 					helperText={errors.cartValue?.message}
 				/>
@@ -69,9 +80,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 				helperText={errors.orderTime?.message}
 			/>
 
-			<Button type="submit" variant="contained">
-				Calculate delivery price
-			</Button>
+			<Button type="submit" variant="contained">Calculate</Button>
 		</Stack>
 	);
 };
