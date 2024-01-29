@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Paper, Stack, Typography } from "@mui/material";
 import { DeliveryFeeForm, FormData } from "@src/components/forms/DeliveryFeeForm";
 import { calculateDeliveryFee } from "@src/utils";
 
@@ -13,22 +13,33 @@ export default function App() {
 	}
 
 	return (
-		<Stack component={Container} minHeight="100%" justifyContent="center" alignItems="center">
-			<DeliveryFeeForm
-				width="clamp(300px, 100%, 500px)"
-				boxSizing="border-box"
-				marginX="auto"
-				onSubmit={handleSubmit}
-			/>
-
-			<Stack component="p" direction="row" marginY={2}>
-				<Typography variant="h4">Delivery cost</Typography>
-				<Box component="span" display="inline-flex" color="rgb(15, 17, 17)" marginLeft={4}>
-					<Typography component="span">€</Typography>
-					<Typography component="span" fontSize="2.5rem" lineHeight="2.5rem" overflow="hidden">{whole}</Typography>
-					<Typography component="span">{fraction}</Typography>
+		<Paper
+			square
+			elevation={0}
+			sx={{ height: "100%", background: '#00C2E8 no-repeat center/75vh url("/yuho.webp")' }}
+		>
+			<Stack component={Container} minHeight="100%" justifyContent="center" alignItems="center">
+				<Box
+					width="clamp(300px, 100%, 500px)"
+					marginX="auto"
+					padding={2}
+					boxSizing="border-box"
+					borderRadius={2}
+					bgcolor="rgba(255, 255, 255, 0.3)"
+					border="1px solid rgba(255, 255, 255, 0.5)"
+					sx={{ backdropFilter: "blur(8px)" }}
+				>
+					<DeliveryFeeForm onSubmit={handleSubmit} />
+					<Stack component="p" direction="row" marginY={2}>
+						<Typography component="span" variant="h4">Delivery cost</Typography>
+						<Box component="span" display="inline-flex" color="rgb(15, 17, 17)" marginLeft={4}>
+							<Typography component="span">€</Typography>
+							<Typography component="span" fontSize="2.5rem" lineHeight="2.5rem">{whole}</Typography>
+							<Typography component="span">{fraction}</Typography>
+						</Box>
+					</Stack>
 				</Box>
 			</Stack>
-		</Stack>
+		</Paper>
 	);
 }

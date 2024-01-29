@@ -20,11 +20,8 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 	return (
 		<Stack
 			component="form"
-			padding={2}
-			borderRadius={2}
 			onSubmit={handleSubmit(submitHandler)}
 			rowGap={2}
-			boxShadow={2}
 			{...rest}
 		>
 			<Typography component="h3" variant="h4" textAlign="center">
