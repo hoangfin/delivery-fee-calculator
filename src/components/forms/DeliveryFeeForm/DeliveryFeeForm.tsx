@@ -27,7 +27,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 			boxShadow={2}
 			{...rest}
 		>
-			<Typography component="h3" color="warning.main">
+			<Typography component="h3" variant="h4" textAlign="center">
 				Delivery Fee Calculator
 			</Typography>
 			<Box display="inline-flex" alignItems="flex-end">
@@ -50,7 +50,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 					label="Delivery distance (m)"
 					variant="standard"
 					inputProps={{ "data-test-id": "deliveryDistance" }}
-					{...register("deliveryDistance", { valueAsNumber: true })}
+					{...register("deliveryDistance")}
 					error={errors.deliveryDistance ? true : false}
 					helperText={errors.deliveryDistance?.message}
 				/>
@@ -63,7 +63,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 					label="Amount of items"
 					variant="standard"
 					inputProps={{ "data-test-id": "numberOfItems" }}
-					{...register("numberOfItems", { valueAsNumber: true })}
+					{...register("numberOfItems")}
 					error={errors.numberOfItems ? true : false}
 					helperText={errors.numberOfItems?.message}
 				/>

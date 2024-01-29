@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import { DeliveryFeeForm, FormData } from "@src/components/forms/DeliveryFeeForm";
 import { calculateDeliveryFee } from "@src/utils";
 
 export default function App() {
 	const [fee, setFee] = useState<number>(0);
+	const [whole, fraction] = fee.toFixed(2).split(".");
 
 	const handleSubmit = (data: FormData, e?: React.BaseSyntheticEvent) => {
 		e?.preventDefault();
-		// console.log(calculateDeliveryFee(data));
 		setFee(calculateDeliveryFee(data));
-		console.log(data);
 	}
 
 	return (
@@ -21,10 +20,15 @@ export default function App() {
 				marginX="auto"
 				onSubmit={handleSubmit}
 			/>
-			<Typography>
-				Delivery cost:
-				<Typography component="span" data-test-id="fee">{fee}$</Typography>
-			</Typography>
+
+			<Stack component="p" direction="row" marginY={2}>
+				<Typography variant="h4">Delivery cost</Typography>
+				<Box component="span" display="inline-flex" color="rgb(15, 17, 17)" marginLeft={4}>
+					<Typography component="span">€</Typography>
+					<Typography component="span" fontSize="2.5rem" lineHeight="2.5rem" overflow="hidden">{whole}</Typography>
+					<Typography component="span">{fraction}</Typography>
+				</Box>
+			</Stack>
 		</Stack>
 	);
 }
