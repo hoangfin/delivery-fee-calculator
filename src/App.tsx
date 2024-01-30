@@ -32,7 +32,7 @@ export default function App() {
 					<DeliveryFeeForm onSubmit={handleSubmit} />
 					<Stack component="p" direction="row" justifyContent="center" marginY={2}>
 						<Typography component="span" variant="h4">Delivery cost</Typography>
-						<Box component="span" display="inline-flex" color="rgb(15, 17, 17)" marginLeft={4}>
+						<Box component="span" display="inline-flex" color="rgb(15, 17, 17)" marginLeft={4} data-test-id="fee">
 							<Typography component="span">€</Typography>
 							<Typography component="span" fontSize="2.5rem" lineHeight="2.5rem">{whole}</Typography>
 							<Typography component="span">{fraction}</Typography>
