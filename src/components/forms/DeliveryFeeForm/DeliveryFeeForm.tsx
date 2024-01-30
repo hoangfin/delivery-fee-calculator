@@ -18,12 +18,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 	};
 
 	return (
-		<Stack
-			component="form"
-			onSubmit={handleSubmit(submitHandler)}
-			rowGap={2}
-			{...rest}
-		>
+		<Stack component="form" onSubmit={handleSubmit(submitHandler)} rowGap={2} {...rest} >
 			<Typography component="h3" variant="h4" textAlign="center">
 				Delivery Fee Calculator
 			</Typography>
@@ -31,6 +26,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 				<Euro sx={{ mr: 1, my: 0.5 }} />
 				<TextField
 					fullWidth
+					autoComplete="off"
 					label="Cart Value"
 					variant="standard"
 					inputProps={{ "data-test-id": "cartValue" }}
@@ -44,6 +40,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 				<LocalShippingOutlined sx={{ mr: 1, my: 0.5 }} />
 				<TextField
 					fullWidth
+					autoComplete="off"
 					label="Delivery distance (m)"
 					variant="standard"
 					inputProps={{ "data-test-id": "deliveryDistance" }}
@@ -57,6 +54,7 @@ export function DeliveryFeeForm(props: DeliveryFeeFormProps) {
 				<ShoppingBasketOutlined sx={{ mr: 1, my: 0.5 }} />
 				<TextField
 					fullWidth
+					autoComplete="off"
 					label="Amount of items"
 					variant="standard"
 					inputProps={{ "data-test-id": "numberOfItems" }}
