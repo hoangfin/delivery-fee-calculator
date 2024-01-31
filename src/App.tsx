@@ -5,7 +5,6 @@ import { calculateDeliveryFee } from "@src/utils";
 
 export default function App() {
 	const [fee, setFee] = useState<number>(0);
-	const [whole, fraction] = fee.toFixed(2).split(".");
 
 	const handleSubmit = (data: FormData, e?: React.BaseSyntheticEvent) => {
 		e?.preventDefault();
@@ -32,10 +31,16 @@ export default function App() {
 					<DeliveryFeeForm onSubmit={handleSubmit} />
 					<Stack component="p" direction="row" justifyContent="center" marginY={2}>
 						<Typography component="span" variant="h4">Delivery cost</Typography>
-						<Box component="span" display="inline-flex" color="rgb(15, 17, 17)" marginLeft={4} data-test-id="fee">
+						<Box component="span" display="inline-flex" color="rgb(15, 17, 17)" marginLeft={4}>
 							<Typography component="span">€</Typography>
-							<Typography component="span" fontSize="2.5rem" lineHeight="2.5rem">{whole}</Typography>
-							<Typography component="span">{fraction}</Typography>
+							<Typography
+								component="span"
+								fontSize="2.5rem"
+								lineHeight="2.5rem"
+								data-test-id="fee"
+							>
+								{fee.toFixed(2)}
+							</Typography>
 						</Box>
 					</Stack>
 				</Box>
