@@ -1,5 +1,4 @@
 # Delivery Fee Calculator - Wolt Summer 2024 Engineering Internships
-
 A calculator that calculates the delivery price depending on the cart value,
 the number of items in the cart, the time of the order, and the delivery distance.
 
