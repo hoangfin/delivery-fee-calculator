@@ -1,8 +1,10 @@
-# Delivery Fee Calculator - Wolt Summer 2024 Engineering Internships
-A calculator that calculates the delivery price depending on the cart value, the number of items in the cart, the time of the order, and the delivery distance.
+# Delivery Fee Calculator - Wolt Summer 2024 Engineering Internships Pre-Assignment
+A calculator that calculates the delivery price depending on the cart value, the number of items in the cart,
+the time of the order and the delivery distance.
+
+The preliminary assignment in detail can be found @<a href="https://github.com/woltapp/engineering-internship-2024">engineering-internship-2024</a>
 
 ### Installation & Run & Test
-
 1. Unzip `calculator.zip` --> directory `calculator` is created.
 2. Open up terminal and navigate to the unzipped directory `calculator`.
 3. Run command `npm install` (chmod 755 if needed).
