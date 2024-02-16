@@ -2,7 +2,8 @@
 A calculator that calculates the delivery price depending on the cart value, the number of items in the cart,
 the time of the order and the delivery distance.
 
-The preliminary assignment in detail can be found @<a href="https://github.com/woltapp/engineering-internship-2024">engineering-internship-2024</a>
+The preliminary assignment's <a href="https://wolt-delivery-fee-calculator.web.app/">live demo</a> and topic 
+in detail can be found @<a href="https://github.com/woltapp/engineering-internship-2024">engineering-internship-2024</a>
 
 ### Installation & Run
 
